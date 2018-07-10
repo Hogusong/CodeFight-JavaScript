@@ -9,15 +9,15 @@ function hasPathWithGivenSum(t, s) {
   if (!t) return false;
   if (!t.left && !t.right)  return (t.value === s);
   
-  var sums = []
+  var hasSum = false;
   if (t.left) getSum(t.left, t.value, s) 
   if (t.right) getSum(t.right, t.value, s)
-  return (sums.indexOf(s) >= 0)
+  return hasSum
 
   function getSum(t, v, s) {
-    if (!t.left && !t.right) sums.push(v+t.value) ;
-    if (t.left) getSum(t.left, t.value+v, s) 
-    if (t.right) getSum(t.right, t.value+v, s)
+    if (!t.left && !t.right && v+t.value === s) hasSum = true ;
+    if (t.left && !hasSum) getSum(t.left, t.value+v, s) 
+    if (t.right && !hasSum) getSum(t.right, t.value+v, s)
   }
 }
 
