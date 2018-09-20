@@ -31,22 +31,18 @@ function checkColumn(grid){
   return true
 }
 
-function checkSquare(grid) {
-  for (let x=0; x<3; x++) {
-      const r = Math.floor(x/3)
-      const c = x%3
-      for (let i=3*r; i<3*(r+1); i++) {
-          for (let j=3*c; j<3*(c+1); j++) {
-              const v = grid[i][j]
-              if (v !== '.') {
-                  for (let y=3*r; y<3*(r+1); y++) {
-                      for (let z=3*c; z<3*(c+1); z++) {
-                         if ( v === grid[y][z] && (i !== y || j !== z))                                return false
-                      }
-                  }                        
-              }
-          }
-      }
-  }
-  return true
+function checkSquare(grid){
+    for (let r=0; r<grid.length; r++) {
+        for (let c=0; c<grid.length; c++) {
+            if (grid[r][c] === '.') continue
+            const [R, C] = [Math.floor(r/3), Math.floor(c/3)] 
+            for (let x=3*R; x<(3*R+3); x++) {
+                for (let y=3*C; y<(3*C+3); y++) {
+                    if ( r === x && c === y) continue
+                    if (grid[r][c] === grid[x][y]) return false
+                }
+            }
+        }
+    }
+    return true
 }
