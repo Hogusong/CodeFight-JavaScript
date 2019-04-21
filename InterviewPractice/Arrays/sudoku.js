@@ -1,4 +1,4 @@
-function sudoku2(grid) {
+function sudoku(grid) {
   if (checkRow(grid)) {
       if (checkColumn(grid)) {
           return (checkSquare(grid))
@@ -8,29 +8,53 @@ function sudoku2(grid) {
 }
 
 function checkRow(grid){
-  for (let r=0; r<grid.length; r++) {
-      for (let c=0; c<grid.length; c++) {
-          for (let j=0; j<grid.length; j++) {
-              if (grid[r][c] !== '.')
-                  if (grid[r][c] === grid[r][j] && c !== j) return false
-          }
-      }
-  }
-  return true
+    for (let r=0; r<grid.length; r++) {
+        for (let c=0; c<grid.length; c++) {
+            for (let j=0; j<grid.length; j++) {
+                if (grid[r][c] !== '.')
+                    if (grid[r][c] === grid[r][j] && c !== j) return false
+            }
+        }
+    }
+    return true
+}
+
+function checkRow1(grid){
+    for (let r=0; r<grid.length; r++) {
+        for (let c=0; c<grid.length; c++) {
+            for (let j=c+1; j<grid.length; j++) {
+                if (grid[r][c] !== '.')
+                    if (grid[r][c] === grid[r][j]) return false
+            }
+        }
+    }
+    return true
 }
 
 function checkColumn(grid){
-  for (let c=0; c<grid.length; c++) {
-      for (let r=0; r<grid.length; r++) {
-          for (let j=0; j<grid.length; j++) {
-              if (grid[r][c] !== '.')
-                  if (grid[r][c] === grid[j][c] && r !== j) return false
-          }
-      }
-  }
-  return true
+    for (let c=0; c<grid.length; c++) {
+        for (let r=0; r<grid.length; r++) {
+            for (let j=0; j<grid.length; j++) {
+                if (grid[r][c] !== '.')
+                    if (grid[r][c] === grid[j][c] && r !== j) return false
+            }
+        }
+    }
+    return true
 }
 
+function checkColumn1(grid){
+    for (let c=0; c<grid.length; c++) {
+        for (let r=0; r<grid.length; r++) {
+            for (let j=r+1; j<grid.length; j++) {
+                if (grid[r][c] !== '.')
+                    if (grid[r][c] === grid[j][c]) return false
+            }
+        }
+    }
+    return true
+}
+  
 function checkSquare(grid){
     for (let r=0; r<grid.length; r++) {
         for (let c=0; c<grid.length; c++) {
