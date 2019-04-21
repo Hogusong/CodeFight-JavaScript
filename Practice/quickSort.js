@@ -146,6 +146,12 @@ quickSortMIT(L3, 0, L3.length-1);
 console.timeEnd('Time for Web quick Sort ')
 console.log(isSame(L3, result));
 
+L4 = L_origin.slice();
+console.time('Time for Javascript Sort ')
+L4 = L_origin.sort((a,b) => a-b);
+console.timeEnd('Time for Javascript Sort ')
+console.log(isSame(L4, result));
+
 function isSame(arr1, arr2) {
   if (arr1.length != arr2.length) return false;
   for (let i=0; i<arr1.length; i++) {
