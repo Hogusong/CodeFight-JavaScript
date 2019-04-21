@@ -84,12 +84,10 @@ function patitionMIT(L, first, last) {
   while (!done) {
     while (l_r <= r_l && L[l_r] <= pivot) {
       l_r ++;
-      count ++
     }
 
     while (l_r <= r_l && L[r_l] >= pivot) {
       r_l --;
-      count ++
     }
 
     if (l_r <= r_l) {
@@ -97,7 +95,6 @@ function patitionMIT(L, first, last) {
     } else {
       done = true;
     }
-    count ++
   }
   [L[first], L[r_l]] = [L[r_l], L[first]];
   return r_l
@@ -127,13 +124,6 @@ const quickSortWeb = (
   return sortedArray;
 };
 
-count = 0
-L1 = L_origin.slice();
-console.time('Time for my quick Sort ')
-quickSortMine(L1, 0, L1.length-1);
-console.timeEnd('Time for my quick Sort ')
-console.log(isSame(L1, result));
-
 L2 = L_origin.slice();
 console.time('Time for MIT quick Sort ')
 quickSortMIT(L2, 0, L2.length-1);
@@ -145,6 +135,12 @@ console.time('Time for Web quick Sort ')
 quickSortMIT(L3, 0, L3.length-1);
 console.timeEnd('Time for Web quick Sort ')
 console.log(isSame(L3, result));
+
+L1 = L_origin.slice();
+console.time('Time for my quick Sort ')
+quickSortMine(L1, 0, L1.length-1);
+console.timeEnd('Time for my quick Sort ')
+console.log(isSame(L1, result));
 
 L4 = L_origin.slice();
 console.time('Time for Javascript Sort ')
