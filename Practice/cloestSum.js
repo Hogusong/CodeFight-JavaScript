@@ -39,7 +39,6 @@ function getPairOptimal(L1, L2, target) {
   const maxL2 = Math.max(...L2);
   if (maxL1 + maxL2 < target) return [[maxL1, maxL2]];
   let diff = target;
-  console.log(diff);
   L2.forEach(e => dict[e] = e);
   for (let e of L1) {
     let gotPair = false;
@@ -91,6 +90,11 @@ const answer2 = getPairOptimal(L1.slice(), L2.slice(), target);
 console.log('count:', count);
 console.timeEnd("Time for Optimal Solution ");
 console.log(isSame(answer1, answer2) + ',  length of answer: ' + answer1.length);
+
+console.time("Time to get max ");
+const maxL1 = Math.max(...L1);
+const maxL2 = Math.max(...L2);
+console.timeEnd("Time to get max ");
 
 console.time("Time for sorting ");
 L1.sort((a,b) => a - b);
