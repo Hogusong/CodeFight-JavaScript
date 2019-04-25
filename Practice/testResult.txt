@@ -1,159 +1,139 @@
-young at Youngs-MBP in ~/Documents/Code-Practice/CodeFight/JavaScript/practice on master
-$ node quickSort.js
-Time to initalize : 52.800ms
-Array.length is 1000468
+----- $ node quickSort.js
+Time to initalize : 69.283ms
+Array.length is 1006144
 
-Time for merge Sort : 850.589ms
+Time for merge Sort : 853.519ms
 
-Time for my quick Sort : 159.933ms
-true
-Time for MIT quick Sort : 274.730ms
-true
-Time for Web quick Sort : 259.051ms
-true
-Time for Javascript Sort : 431.276ms
-true
+Tested the unsorted array.
+Time for MIT quick Sort : 251.233ms
+Time for my quick Sort : 163.296ms
+Time for Javascript Sort : 451.975ms
 
-young at Youngs-MBP in ~/Documents/Code-Practice/CodeFight/JavaScript/practice on master
-$ node quickSort.js
-Time to initalize : 53.512ms
-Array.length is 1000668
+Tested the sorted array.
+Time for MIT quick Sort : 5680.325ms
+Time for my quick Sort : 45.058ms
+Time for Javascript Sort : 183.744ms
 
-Time for merge Sort : 837.939ms
+Tested the reversed of sorted array.
+Time for MIT quick Sort : 5778.866ms
+Time for my quick Sort : 117.677ms
+Time for Javascript Sort : 188.400ms
 
-Time for my quick Sort : 163.347ms
-true
-Time for MIT quick Sort : 269.980ms
-true
-Time for Web quick Sort : 257.284ms
-true
-Time for Javascript Sort : 438.420ms
-true
+Tested [1,1, ..., 1,0].  The length is 10000.
 
-young at Youngs-MBP in ~/Documents/Code-Practice/CodeFight/JavaScript/practice on master
-$ node quickSort.js
-Time to initalize : 55.525ms
-Array.length is 1000282
+Time for merge Sort : 6.602ms
+Time for MIT quick Sort : 78.515ms
+Time for my quick Sort : 0.457ms
+Time for Javascript Sort : 0.261ms
 
-Time for merge Sort : 833.667ms
+----- $ node quickSort.js
+Time to initalize : 71.592ms
+Array.length is 1005712
 
-Time for my quick Sort : 161.279ms
-true
-Time for MIT quick Sort : 279.874ms
-true
-Time for Web quick Sort : 261.625ms
-true
-Time for Javascript Sort : 479.385ms
-true
+Time for merge Sort : 870.667ms
 
-young at Youngs-MBP in ~/Documents/Code-Practice/CodeFight/JavaScript/practice on master
-$ node quickSort.js
-Time to initalize : 55.067ms
-Array.length is 1000530
+Tested the unsorted array.
+Time for MIT quick Sort : 247.074ms
+Time for my quick Sort : 160.347ms
+Time for Javascript Sort : 451.624ms
 
-Time for merge Sort : 831.529ms
+Tested the sorted array.
+Time for MIT quick Sort : 5648.033ms
+Time for my quick Sort : 43.822ms
+Time for Javascript Sort : 180.637ms
 
-Time for my quick Sort : 161.996ms
-true
-Time for MIT quick Sort : 273.904ms
-true
-Time for Web quick Sort : 260.334ms
-true
-Time for Javascript Sort : 403.700ms
-true
+Tested the reversed of sorted array.
+Time for MIT quick Sort : 5713.996ms
+Time for my quick Sort : 78.559ms
+Time for Javascript Sort : 179.215ms
 
-young at Youngs-MBP in ~/Documents/Code-Practice/CodeFight/JavaScript/practice on master
-$ node quickSort.js
-Time to initalize : 55.166ms
-Array.length is 1008772
+Tested [0,1,1, ..., 1]. The length is 10000
 
-Time for merge Sort : 851.671ms
+Time for merge Sort : 6.096ms
+Time for MIT quick Sort : 73.960ms
+Time for my quick Sort : 0.322ms
+Time for Javascript Sort : 0.455ms
 
-Time for my quick Sort : 163.226ms
-true
-Time for MIT quick Sort : 278.294ms
-true
-Time for Web quick Sort : 266.701ms
-true
-Time for Javascript Sort : 440.703ms
-true
+----- $ node quickSort.js
+Time to initalize : 69.521ms
+Array.length is 1001028
 
-young at Youngs-MBP in ~/Documents/Code-Practice/CodeFight/JavaScript/practice on master
-$ node quickSort.js
-Time to initalize : 54.817ms
-Array.length is 1008275
+Time for merge Sort : 859.667ms
 
-Time for merge Sort : 842.512ms
+Tested the unsorted array.
+Time for MIT quick Sort : 247.202ms
+Time for my quick Sort : 161.722ms
+Time for Javascript Sort : 441.939ms
 
-Time for my quick Sort : 166.006ms
-true
-Time for MIT quick Sort : 278.748ms
-true
-Time for Web quick Sort : 271.709ms
-true
-Time for Javascript Sort : 458.502ms
-true
+Tested the sorted array.
+Time for MIT quick Sort : 5627.084ms
+Time for my quick Sort : 44.303ms
+Time for Javascript Sort : 175.372ms
 
-young at Youngs-MBP in ~/Documents/Code-Practice/CodeFight/JavaScript/practice on master
-$ node quickSort.js
-Time to initalize : 55.248ms
-Array.length is 1000402
+Tested the reversed of sorted array.
+Time for MIT quick Sort : 5736.355ms
+Time for my quick Sort : 52.317ms
+Time for Javascript Sort : 178.345ms
 
-Time for merge Sort : 838.506ms
+Tested [1, ..., 1,0,1, ..., 1]. The length is 10000
 
-Time for my quick Sort : 158.881ms
-true
-Time for MIT quick Sort : 277.547ms
-true
-Time for Web quick Sort : 260.530ms
-true
-Time for Javascript Sort : 470.601ms
-true
+Time for merge Sort : 5.722ms
+Time for MIT quick Sort : 74.184ms
+Time for my quick Sort : 0.309ms
+Time for Javascript Sort : 0.257ms
 
-young at Youngs-MBP in ~/Documents/Code-Practice/CodeFight/JavaScript/practice on master
-$ node quickSort.js
-Time to initalize : 54.532ms
-Array.length is 1008441
+---- $ node quickSort.js
+Time to initalize : 72.823ms
+Array.length is 1000548
 
-Time for merge Sort : 847.877ms
+Time for merge Sort : 875.718ms
 
-Time for my quick Sort : 168.390ms
-true
-Time for MIT quick Sort : 282.815ms
-true
-Time for Web quick Sort : 259.466ms
-true
-Time for Javascript Sort : 445.083ms
-true
+Tested the unsorted array.
+Time for MIT quick Sort : 244.694ms
+Time for my quick Sort : 157.964ms
+Time for Javascript Sort : 438.528ms
 
-young at Youngs-MBP in ~/Documents/Code-Practice/CodeFight/JavaScript/practice on master
-$ node quickSort.js
-Time to initalize : 56.881ms
-Array.length is 1005989
+Tested the sorted array.
+Time for MIT quick Sort : 5642.554ms
+Time for my quick Sort : 44.524ms
+Time for Javascript Sort : 179.823ms
 
-Time for merge Sort : 844.174ms
+Tested the reversed of sorted array.
+Time for MIT quick Sort : 5678.604ms
+Time for my quick Sort : 65.483ms
+Time for Javascript Sort : 177.111ms
 
-Time for my quick Sort : 164.577ms
-true
-Time for MIT quick Sort : 359.842ms
-true
-Time for Web quick Sort : 259.658ms
-true
-Time for Javascript Sort : 410.452ms
-true
+Tested [1,1, ..., ,1,0]. The length is 10000
 
-young at Youngs-MBP in ~/Documents/Code-Practice/CodeFight/JavaScript/practice on master
-$ node quickSort.js
-Time to initalize : 53.486ms
-Array.length is 1001242
+Time for merge Sort : 6.725ms
+Time for MIT quick Sort : 76.667ms
+Time for my quick Sort : 0.379ms
+Time for Javascript Sort : 0.385ms
 
-Time for merge Sort : 833.283ms
+---- $ node quickSort.js
+Time to initalize : 70.944ms
+Array.length is 1004393
 
-Time for my quick Sort : 162.319ms
-true
-Time for MIT quick Sort : 286.732ms
-true
-Time for Web quick Sort : 265.385ms
-true
-Time for Javascript Sort : 450.029ms
-true
+Time for merge Sort : 907.268ms
+
+Tested the unsorted array.
+Time for MIT quick Sort : 250.837ms
+Time for my quick Sort : 164.520ms
+Time for Javascript Sort : 435.355ms
+
+Tested the sorted array.
+Time for MIT quick Sort : 5639.486ms
+Time for my quick Sort : 44.432ms
+Time for Javascript Sort : 181.184ms
+
+Tested the reversed of sorted array.
+Time for MIT quick Sort : 5673.868ms
+Time for my quick Sort : 123.596ms
+Time for Javascript Sort : 180.158ms
+
+Tested [1,1, ..., 1,0]. The length is 10000
+
+Time for merge Sort : 6.457ms
+Time for MIT quick Sort : 74.283ms
+Time for my quick Sort : 0.366ms
+Time for Javascript Sort : 0.299ms

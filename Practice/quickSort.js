@@ -27,8 +27,6 @@ function mergeSort(L) {
 
 console.time('Time for merge Sort ')
 result = mergeSort(L_origin.slice());
-// result = mergeSort(testL.slice());
-// console.log(result, count);
 console.timeEnd('Time for merge Sort ')
 console.log()
 
@@ -100,53 +98,23 @@ function patitionMIT(L, first, last) {
   return r_l
 }
 
-const quickSortWeb = (
-  unsortedArray,
-  comparator = defaultComparator
-) => {
-
-  // Create a sortable array to return.
-  const sortedArray = [...unsortedArray];
-
-  // Recursively sort sub-arrays.
-  const recursiveSort = (start, end) => {
-
-    // If this sub-array is empty, it's sorted.
-    if (end - start < 1) {
-      return;
-    }
-    const pivotValue = sortedArray[end];
-    let splitIndex = start;
-  };
-
-  // Sort the entire array.
-  recursiveSort(0, unsortedArray.length - 1);
-  return sortedArray;
-};
-
+console.log('Tested the unsorted array.')
 L2 = L_origin.slice();
 console.time('Time for MIT quick Sort ')
 quickSortMIT(L2, 0, L2.length-1);
 console.timeEnd('Time for MIT quick Sort ')
-console.log(isSame(L2, result));
-
-L3 = L_origin.slice();
-console.time('Time for Web quick Sort ')
-quickSortMIT(L3, 0, L3.length-1);
-console.timeEnd('Time for Web quick Sort ')
-console.log(isSame(L3, result));
+// console.log(isSame(L2, result));
 
 L1 = L_origin.slice();
 console.time('Time for my quick Sort ')
 quickSortMine(L1, 0, L1.length-1);
 console.timeEnd('Time for my quick Sort ')
-console.log(isSame(L1, result));
+// console.log(isSame(L1, result));
 
-L4 = L_origin.slice();
 console.time('Time for Javascript Sort ')
-L4 = L_origin.sort((a,b) => a-b);
+L3 = L_origin.sort((a,b) => a-b);
 console.timeEnd('Time for Javascript Sort ')
-console.log(isSame(L4, result));
+// console.log(isSame(L3, result));
 
 function isSame(arr1, arr2) {
   if (arr1.length != arr2.length) return false;
@@ -155,3 +123,72 @@ function isSame(arr1, arr2) {
   }
   return true;
 }
+
+// test whti the sorted array.
+console.log('\nTested the sorted array.')
+L2 = result.slice();
+console.time('Time for MIT quick Sort ')
+quickSortMIT(L2, 0, L2.length-1);
+console.timeEnd('Time for MIT quick Sort ')
+// console.log(isSame(L2, result));
+
+L1 = result.slice();
+console.time('Time for my quick Sort ')
+quickSortMine(L1, 0, L1.length-1);
+console.timeEnd('Time for my quick Sort ')
+// console.log(isSame(L1, result));
+
+console.time('Time for Javascript Sort ')
+L3 = result.sort((a,b) => a-b);
+console.timeEnd('Time for Javascript Sort ')
+// console.log(isSame(L3, result));
+
+// test with the sorted & reversed array 
+console.log('\nTested the reversed of sorted array.')
+reversed = result.slice();
+reversed.reverse();
+L2 = result.slice();
+console.time('Time for MIT quick Sort ')
+quickSortMIT(L2, 0, L2.length-1);
+console.timeEnd('Time for MIT quick Sort ')
+// console.log(isSame(L2, result));
+
+L1 = reversed.slice();
+console.time('Time for my quick Sort ')
+quickSortMine(L1, 0, L1.length-1);
+console.timeEnd('Time for my quick Sort ')
+// console.log(isSame(L1, result));
+
+console.time('Time for Javascript Sort ')
+L3 = reversed.sort((a,b) => a-b);
+console.timeEnd('Time for Javascript Sort ')
+// console.log(isSame(L3, result));
+
+range = 10000;
+origin = [];
+for (let i=0; i<range; i++) {
+  origin.push(1);
+}
+origin[origin.length-1] = 0;
+
+console.log('\nTested [1,1, ..., 1,1,0]. The length is ' + range + '\n');
+console.time('Time for merge Sort ')
+result = mergeSort(origin.slice());
+console.timeEnd('Time for merge Sort ')
+
+L2 = origin.slice();
+console.time('Time for MIT quick Sort ')
+quickSortMIT(L2, 0, L2.length-1);
+console.timeEnd('Time for MIT quick Sort ')
+// console.log(isSame(L2, result));
+
+L1 = origin.slice();
+console.time('Time for my quick Sort ')
+quickSortMine(L1, 0, L1.length-1);
+console.timeEnd('Time for my quick Sort ')
+// console.log(isSame(L1, result));
+
+console.time('Time for Javascript Sort ')
+L3 = origin.sort((a,b) => a-b);
+console.timeEnd('Time for Javascript Sort ')
+// console.log(isSame(L3, result));
