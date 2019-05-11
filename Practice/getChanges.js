@@ -1,4 +1,4 @@
-const amount = 222;
+const amount = 64;  // try with 222
 const numbers = [5, 1, 25, 10, 21];
 let answer = [];
 
@@ -28,29 +28,22 @@ console.timeEnd('Time this')
 
 // possible to get smallest count of changes
 function getChangeObjLoop(arr, amount, obj={0: []}) {
-  let answer = null;
-  let count = 0
-  while (!answer) {
+  while (true) {
     const temp = {...obj};
     obj = {};
     for (let key in temp) {
       const diff = amount - key;
       if (arr.includes(diff)) {
-        answer = temp[key].slice();
-        answer.push(diff);
-        return answer
+        return [...temp[key], diff];
       }
       if (key < amount) {
         for (let coin of arr) {
-          const xxx = temp[key].slice()
-          xxx.push(coin);
           const newKey = +key + coin
-          obj[newKey] = xxx;
+          obj[newKey] = [...temp[key], coin];
         }
       }
     }
   }
-  return answer;
 }
 
 // possible to get smallest count of changes
