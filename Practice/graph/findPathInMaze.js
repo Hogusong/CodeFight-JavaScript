@@ -10,6 +10,15 @@ const maze = [
   [0, 1, 1, 1, 1, 0, 0, 1, 1]
 ]
 
+const maze2 = [
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1]
+]
+
 class Edge {
   constructor(s, d) {
     this.source = s;
@@ -25,11 +34,11 @@ class DiGraph {
     this.nodes = {};
   }
 
-  addNode(name) {
-    if (this.nodes[name]) {
-      console.log(name, 'exist already in this map.')
+  addNode(node) {
+    if (this.nodes[node]) {
+      console.log(node, 'exist already in this map.')
     } else {
-      this.nodes[name] = [];
+      this.nodes[node] = [];
     }
   }
 
@@ -46,16 +55,16 @@ class DiGraph {
     }
   }
 
-  getDestinations(name) {
-    return this.nodes[name];
+  getDestinations(node) {
+    return this.nodes[node];
   }
 
   isNewEdge(src, dest) {
     return !this.edges.find(e => e.getSource() === src && e.getDestination() === dest);
   }
 
-  isNodeInMaze(name) {
-    return this.nodes[name] != undefined;
+  isNodeInMaze(node) {
+    return this.nodes[node] != undefined;
   }
 
   getNodes() {
@@ -73,16 +82,16 @@ class Graph extends DiGraph {
 
 function buildGraph(maze) {
   const g = new DiGraph();
-  for (let r=0; r<9; r++) {
-    for (let c=0; c<9; c++) {
+  for (let r=0; r<maze.length; r++) {
+    for (let c=0; c<maze[r].length; c++) {
       if (maze[r][c] === 1) {
         g.addNode(r+':'+c)
       }      
     }
   }
 
-  for (let r=0; r<9; r++) {
-    for (let c=0; c<9; c++) {
+  for (let r=0; r<maze.length; r++) {
+    for (let c=0; c<maze[r].length; c++) {
       if (maze[r][c] === 1) {
         const possibleDestinations = getPossibleNodes(r, c, maze)
         possibleDestinations.forEach(dest => {
@@ -112,7 +121,7 @@ function getPossibleNodes(r, c, maze) {
 }
 
 function isPossibleNode(r, c, maze) {
-  if (r < 0 || r > 8 || c < 0 || c > 8 || maze[r][c] === 0) {
+  if (r < 0 || r >= maze.length  || c < 0 || c >= maze[0].length || maze[r][c] === 0) {
     return false;
   }
   return true;
@@ -161,7 +170,7 @@ function BFS(graph, start, end) {
   return null
 }
 
-function findPath(start, end, s_type) {
+function findPath(start, end, maze, s_type) {
   const g = buildGraph(maze);
   if (g.isNodeInMaze(start) && g.isNodeInMaze(end)) {
     return (s_type === 'DFS') ? DFS(g, start, end, [], []) : BFS(g, start, end);
@@ -169,17 +178,28 @@ function findPath(start, end, s_type) {
   return null;  
 }
 
+// 9 x 9 maze
 [start, end] = ['0:8', '8:8'];
-const pathDFS = findPath(start, end, 'DFS');
-const pathBFS = findPath(start, end, 'BFS');
-if (pathDFS) {
-  console.log('Shortest path of', start, 'to', end, 'is', pathDFS.join(' -> '))
-} else {
-  console.log('There is no path of ' + start + ' to ' + end + '.')
-}
-if (pathBFS) {
-  console.log('Shortest path of', start, 'to', end, 'is', pathBFS.join(' -> '))
-} else {
-  console.log('There is no path of ' + start + ' to ' + end + '.')
-}
+pathDFS = findPath(start, end, maze, 'DFS');
+pathBFS = findPath(start, end, maze, 'BFS');
+pringPath(pathDFS, pathBFS)
 
+// 6 x 7 maze
+[start, end] = ['4:5', '1:4'];
+pathDFS = findPath(start, end, maze2, 'DFS');
+pathBFS = findPath(start, end, maze2, 'BFS');
+pringPath(pathDFS, pathBFS)
+
+
+function pringPath(pathDFS, pathBFS) {
+  if (pathDFS) {
+    console.log('Shortest path of', start, 'to', end, 'is', pathDFS.join(' -> '))
+  } else {
+    console.log('There is no path of ' + start + ' to ' + end + '.')
+  }
+  if (pathBFS) {
+    console.log('Shortest path of', start, 'to', end, 'is', pathBFS.join(' -> '))
+  } else {
+    console.log('There is no path of ' + start + ' to ' + end + '.')
+  }  
+}
