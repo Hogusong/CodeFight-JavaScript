@@ -60,9 +60,8 @@ class DiGraph {
     return !this._edges.find(e => e.isSameAs(edge));
   }
 
-  getDestinations(node) {
-    const name = node.getName();
-    return this._nodes[name];
+  getDestinations(name) {
+    return this._nodes[name].slice(1);
   }
 
   findNode(name) {
@@ -114,7 +113,7 @@ function findPathDFS(graph, start, end, path, shortest) {
     console.log('Current DFS path:', path.join(' -> '));
   }
 
-  for (let node of graph.getDestinations(start)) {
+  for (let node of graph.getDestinations(start.getName())) {
     if (path.includes(node.getName())) {
       console.log('Already visited', node.getName());
     } else if (shortest.length < 1 || path.length < shortest.length) {
@@ -128,7 +127,21 @@ function findPathDFS(graph, start, end, path, shortest) {
 }
 
 function findPathBFS(graph, start, end) {
+  const pathQueue = [[start.getName()]];
 
+  while (pathQueue.length > 0) {
+    const temp = pathQueue.shift();
+    const lastName = temp[temp.length-1];
+    if (lastName === end.getName()) {  return temp  }
+    // console.log('Current BFS path:', temp.join(' -> '));
+
+    for (let node of graph.getDestinations(lastName)) {
+      if (!temp.includes(node.getName())) {
+        pathQueue.push([...temp, node.getName()])
+      }
+    }
+  }
+  return [];
 }
 
 function findPath(cities, from, to, g_type, s_type) {
@@ -137,20 +150,30 @@ function findPath(cities, from, to, g_type, s_type) {
     const start = graph.findNode(from);
     const end = graph.findNode(to);
     const path = s_type === "DFS" ? findPathDFS(graph, start, end, [], []) : findPathBFS(graph, start, end);
-    if (path) {
+    if (path.length > 0) {
       console.log('Shortest path of', from, 'to', to, 'is', path.join(' -> '))
     } else {
       console.log('There is no path of ' + from + ' to ' + to + '.')
     }  
+  } else {
+    console.log(from, 'or', to, 'is not in the Map.')
   }
-  return console.log(from, 'or', to, 'is not in the Map.')
 }
 
 
 const cities = ['Boston', 'Providence', 'New York', 'Chicago', 'Denver', 'Phoenix', 'Los Angeles'];
 
 findPath(cities, 'Boston', 'Phoenix', 'DiGraph', 'DFS');
+findPath(cities, 'Boston', 'Phoenix', 'DiGraph', 'BFS');
 
+findPath(cities, 'Chicago', 'Boston', 'DiGraph', 'DFS')
+findPath(cities, 'Chicago', 'Boston', 'DiGraph', 'BFS')
+
+findPath(cities, 'Boston', 'Phoenix', 'Graph', 'DFS');
+findPath(cities, 'Boston', 'Phoenix', 'Graph', 'BFS');
+
+findPath(cities, 'Chicago', 'Boston', 'Graph', 'DFS')
+findPath(cities, 'Chicago', 'Boston', 'Graph', 'BFS')
 
 function printGraph(graph) {
   nodes = graph._nodes;
