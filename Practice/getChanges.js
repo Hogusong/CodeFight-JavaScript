@@ -1,32 +1,7 @@
-const amount = 64;  // try with 222
+const amount = 161;  // try with 222
 const numbers = [5, 1, 25, 10, 21];
-let answer = [];
 
-// run fast to get a result
-function getChangesRec(arr, amount, changes) {
-  if (amount === 0){
-    answer = [...changes];
-    return
-  } else if (answer.length > 0 && answer.length <= changes.length) {
-    return
-  } 
-  for (let i=0; i<arr.length; i++) {
-    if (amount >= arr[i]) {
-      changes.push(arr[i]);
-      return getChangesRec(arr, amount-arr[i], [...changes])
-    }
-  }
-}
-
-console.time('Time this');
-// const soredNumbers = numbers.sort((a,b) => b - a);
-// getChangesRec(soredNumbers, amount, [])
-getChangesRec(numbers, amount, [])
-console.log(answer);
-console.log(getSum(answer), answer.length);
-console.timeEnd('Time this')
-
-// possible to get smallest count of changes
+// Fastest solution
 function getChangeObjLoop(arr, amount, obj={0: []}) {
   while (true) {
     const temp = {...obj};
@@ -46,7 +21,12 @@ function getChangeObjLoop(arr, amount, obj={0: []}) {
   }
 }
 
-// possible to get smallest count of changes
+console.log();
+console.time('Time Object & Loop');
+result = getChangeObjLoop(numbers, amount, [[]]);
+console.timeEnd('Time Object & Loop')
+console.log(result);
+
 // no good for big amount (failed - JavaScript heap out of memory)
 function getChangeLoop(arr, amount, que=[[]]) {
   while (true) {
@@ -65,7 +45,12 @@ function getChangeLoop(arr, amount, que=[[]]) {
   }
 }
 
-// possible to get smallest count of changes
+console.log();
+console.time('Time just Loop')
+result = getChangeLoop(numbers, amount)
+console.timeEnd('Time just Loop')
+console.log(result);
+
 // no good for big amount (failed - JavaScript heap out of memory)
 function getChangeLoopRec(arr, amount, que) {
   const temp = [...que];
@@ -82,28 +67,37 @@ function getChangeLoopRec(arr, amount, que) {
   return answer ? answer : getChangeLoopRec(arr, amount, [...que])
 }
 
+console.log();
+console.time('Time Loop & Recursion')
+result = getChangeLoopRec(numbers, amount, [[]])
+console.timeEnd('Time Loop & Recursion')
+console.log(result);
+
+// Slowest solution
+// really no good for big amount (failed - JavaScript heap out of memory)
+function getChangesRec(arr, amount, changes, shortest) {
+  if (amount === 0){    return [...changes];  }
+   
+  for (let i=0; i<arr.length; i++) {
+    if (amount >= arr[i] && (shortest.length < 1 || changes.length < shortest.length)) {
+      const newChanges =  getChangesRec(arr, amount-arr[i], [...changes, arr[i]], [...shortest])
+      if (newChanges) {
+        shortest = newChanges;
+      }
+    }
+  }
+  return shortest;
+}
+
+console.log();
+console.time('Time Recursion');
+answer = getChangesRec(numbers, amount, [], [])
+console.timeEnd('Time Recursion')
+console.log(answer);
+
+
 function getSum(temp) {
   let sum = 0;
   temp.forEach(amt => sum += amt);
   return sum;
 }
-
-console.time('Time this');
-result = getChangeObjLoop(numbers, amount, [[]]);
-console.log(result);
-console.log(getSum(result), result.length);
-console.timeEnd('Time this')
-
-//  no good for big amount (failed - JavaScript heap out of memory)
-console.time('Time this')
-result = getChangeLoop(numbers, amount)
-console.log(result);
-console.timeEnd('Time this')
-
-/*
-//  really no good for big amount (failed - JavaScript heap out of memory)
-console.time('Time this')
-result = getChangeLoopRec(numbers, amount, [[]])
-console.log(result);
-console.timeEnd('Time this')
-*/
