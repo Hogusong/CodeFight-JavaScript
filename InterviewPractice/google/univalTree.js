@@ -43,6 +43,13 @@ function countUnivalSubTrees(node) {
   }
 }
 
+function XcountUnivalSubTrees(node) {
+  if (!node) return 0;
+  return (isUnivalTree(node) ? 1 : 0)
+         + XcountUnivalSubTrees(node.getLeft())
+         + XcountUnivalSubTrees(node.getRight());
+}
+
 const n5 = new Node('A');
 const n4 = new Node('a', null, n5);
 const n3 = new Node('a');
@@ -53,6 +60,8 @@ const root = new Node('a', n1, n2);
 count = 0;
 countUnivalSubTrees(root);
 console.log(count)
+count = XcountUnivalSubTrees(root);
+console.log(count)
 
 root.setValue('d');
 n1.setValue('c');
@@ -60,4 +69,6 @@ n5.setValue('a');
 
 count = 0;
 countUnivalSubTrees(root);
+console.log(count)
+count = XcountUnivalSubTrees(root, 0);
 console.log(count)
