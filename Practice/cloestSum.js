@@ -37,29 +37,23 @@ function getPairOptimal(L1, L2, target) {
   let result = [];
   const maxL1 = Math.max(...L1);
   const maxL2 = Math.max(...L2);
-  if (maxL1 + maxL2 < target) return [[maxL1, maxL2]];
-  let diff = target;
+  if (maxL1 + maxL2 <= target) return [[maxL1, maxL2]];
+  let diff = target * target;
   L2.forEach(e => dict[e] = e);
-  for (let e of L1) {
-    let gotPair = false;
-    for (let i=0; i<=diff; i++) {
+  for (let i=0; i<diff; i++) {
+    for (let e of L1) {
       count++;
       if (dict[target-e-i]) {
-        gotPair = true;
-        if (i < diff) result = []
+        if (i < diff) {  result = [];  }
         diff = i;
         result.push([e, dict[target-e-i]]);
       }
       if (i > 0 && dict[target-e+i]) {
-        gotPair = true;
-        if (i < diff) result = []
+        if (i < diff) {  result = [];  }
         diff = i;
-        result.push([e, dict[target-e+i]])
+        result.push([e, dict[target-e+i]]);
       }
-      if (gotPair) {
-        break;
-      }
-    }    
+    }
   }
   return result;
 }
@@ -70,24 +64,26 @@ function getPairSet(L1, L2, target) {
 }
 
 count = 0;
-maxCount = 50000;
-const target = Math.floor(Math.random() * maxCount * 10) + (maxCount % 19);
-console.time("Time to initialize ");
-let L1 = makeList(maxCount);
-let L2 = makeList(maxCount);
-console.timeEnd("Time to initialize ");
+maxCount = 5000;
+// let L1 = makeList(maxCount);
+// let L2 = makeList(maxCount);
+// let target = Math.floor(Math.random() * maxCount * 10) + (maxCount % 19);
+
+let L1 = [-1, 3, 7, 12, 9, 5, 15];
+let L2 = [4, 13, 2, 10, 5, 20, 16];
+let target = 24
 
 console.log('\nArray length is: ' + maxCount + ',  target sum: ' + target)
 
 console.time("Time for Bruit-Force Solution ");
 const answer1 = getPairStandard(L1.slice(), L2.slice(), target);
-console.log('count:', count);
+// console.log('count:', count);
 console.timeEnd("Time for Bruit-Force Solution ");
 
 count = 0;
 console.time("Time for Optimal Solution ");
 const answer2 = getPairOptimal(L1.slice(), L2.slice(), target);
-console.log('count:', count);
+// console.log('count:', count);
 console.timeEnd("Time for Optimal Solution ");
 console.log(isSame(answer1, answer2) + ',  length of answer: ' + answer1.length);
 
