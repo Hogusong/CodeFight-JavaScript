@@ -185,9 +185,9 @@ pathBFS = findPath(start, end, maze, 'BFS');
 pringPath(pathDFS, pathBFS)
 
 // 6 x 7 maze
-[start, end] = ['4:5', '1:4'];
-pathDFS = findPath(start, end, maze2, 'DFS');
-pathBFS = findPath(start, end, maze2, 'BFS');
+const [from, to] = ['4:5', '1:4'];
+pathDFS = findPath(from, to, maze2, 'DFS');
+pathBFS = findPath(from, to, maze2, 'BFS');
 pringPath(pathDFS, pathBFS)
 
 
