@@ -3,7 +3,7 @@
  * @param {string} p
  * @return {boolean}
  */
- var isMatch = function(s, p) {
+var isMatch = function(s, p) {
   const lS = s.length;
   const lP = p.length;
   const isMatchRec = (i, j) => {
@@ -20,7 +20,7 @@
   return isMatchRec(0, 0)
 };
 
-// Using a Dictionary.
+// Using a 2D Array as a TABLE.
 var isMatch2 = function(s, p) {
   if (s.length < 1) return p.length < 1 || p === '*';
   const m = s.length,  n = p.length;

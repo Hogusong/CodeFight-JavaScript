@@ -26,15 +26,35 @@ var connect = function(root) {
   return root;
 }
 
-// Using Recursion
+// Using Recursion.  It was guaranteed that all nodes have left and right.
 var connect = function(root) {
   if (!root) return root;
 
   if (root.left) root.left.next = root.right;
   if (root.right && root.next) root.right.next = root.next.left;
 
-  connect(root.left);
   connect(root.right);
+  connect(root.left);
 
   return root;
+}
+
+// Standard solution: Not guaranteed that all nodes have left and right.
+var connect = function(root) {
+  if (!root) return root;
+
+  if (root.left) root.left.next = root.right ? root.right : findNext(root.next);
+  if (root.right) root.right.next = findNext(root.next);
+
+  connect(root.right);
+  connect(root.left);
+
+  return root;
+}
+
+function findNext(node) {
+    if (!node) return null;
+    if (node.left) return node.left;
+    if (node.right) return node.right;
+    return findNext(node.next);
 }

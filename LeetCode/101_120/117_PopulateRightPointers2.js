@@ -49,3 +49,22 @@ function findNext(node) {
   if (node.right) return node.right;
   return findNext(node.next);
 }
+
+var connect = function(root) {
+  if (!root) return root;
+  let nextNode = root.next
+  while (nextNode) {
+      if (nextNode.left || nextNode.right) {
+          nextNode = nextNode.left ? nextNode.left : nextNode.right;
+          break;
+      } else nextNode = nextNode.next;
+  }
+  
+  if (root.left) root.left.next = root.right ? root.right : nextNode;
+  if (root.right) root.right.next = nextNode;
+  
+  connect(root.right);
+  connect(root.left);
+
+  return root;
+}

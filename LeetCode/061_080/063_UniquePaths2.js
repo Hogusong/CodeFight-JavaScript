@@ -37,7 +37,7 @@
   return obstacleGrid[m-1][n-1]
 }
 
-// Using Recursion: Time Limit Exceeded.
+// Using Recursion: Time Limit Exceeded. 30/41 test cases passed.
 var uniquePathsWithObstacles2 = function(obstacleGrid) {
   const m = obstacleGrid.length;
   const n = obstacleGrid[0].length;

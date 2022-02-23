@@ -101,3 +101,66 @@ var solve = function(board) {
 function isValid(r, c, m, n) {
   return r > 0 && r < m-1 && c > 0 && c < n-1
 }
+
+var solve = function(board) {
+  if (board.length < 3 || board[0].length < 3) return board;
+  const m = board.length,  n = board[0].length, stack = [];
+  
+  const isValid = (r, c) => r * c > 0 && r < m - 1 && c < n - 1;
+  
+  const flipping = (r, c) => {
+      if (board[r][c] != 'O') return;
+      board[r][c] = '.';
+      if (isValid(r - 1, c)) flipping(r - 1, c);
+      if (isValid(r, c - 1)) flipping(r, c - 1);
+      if (isValid(r + 1, c)) flipping(r + 1, c);
+      if (isValid(r, c + 1)) flipping(r, c + 1);
+  }
+
+  for (let r = 0; r < m; r++) {
+      flipping(r, 0);
+      flipping(r, n - 1);
+  }
+  for (let c = 0; c < n; c++) {
+      flipping(0, c);
+      flipping(m - 1, c);
+  }
+  
+  for (let r = 0; r < m; r++) {
+      for (let c = 0; c < n; c++) {
+          board[r][c] = board[r][c] == '.' ? 'O' : 'X'; 
+      }
+  }
+}
+
+// Best(Simple) solution.
+var solve = function(board) {
+  if (board.length < 3 || board[0].length < 3) return board;
+  const m = board.length,  n = board[0].length;
+  
+  const isValid = (r, c) => r * c > 0 && r < m - 1 && c < n - 1;
+  
+  const flipping = (r, c) => {
+      if (board[r][c] != 'O') return;
+      board[r][c] = '.';
+      if (isValid(r - 1, c)) flipping(r - 1, c);
+      if (isValid(r, c - 1)) flipping(r, c - 1);
+      if (isValid(r + 1, c)) flipping(r + 1, c);
+      if (isValid(r, c + 1)) flipping(r, c + 1);
+  }
+
+  for (let r = 0; r < m; r++) {
+      flipping(r, 0);
+      flipping(r, n - 1);
+  }
+  for (let c = 0; c < n; c++) {
+      flipping(0, c);
+      flipping(m - 1, c);
+  }
+  
+  for (let r = 0; r < m; r++) {
+      for (let c = 0; c < n; c++) {
+          board[r][c] = board[r][c] == '.' ? 'O' : 'X'; 
+      }
+  }
+}

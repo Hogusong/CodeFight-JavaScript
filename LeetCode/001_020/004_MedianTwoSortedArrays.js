@@ -24,6 +24,27 @@ var findMedianSortedArrays = function(A, B) {
   }
 };
 
+var findMedianSortedArrays = function(A, B) {
+  if (A.length > B.length) [A, B] = [B, A];
+  const len = A.length + B.length;
+  let mid = Math.floor(len / 2);
+  let left = 0, right = A.length - 1, leftA, rightA, leftB, rightB;
+  while (true) {
+      const i = Math.floor((left + right) / 2);
+      const j = mid - i - 2;
+      leftA = i >= 0 ? A[i] : -Number.MAX_VALUE;
+      rightA = i + 1 < A.length ? A[i + 1] : Number.MAX_VALUE;
+      leftB = j >= 0 ? B[j] : -Number.MAX_VALUE;
+      rightB = j + 1 < B.length ? B[j + 1] : Number.MAX_VALUE;
+      if (leftA <= rightB && leftB <= rightA) break;
+      if (leftA > rightB) right--;
+      else left++;
+  }
+  
+  if (len % 2 == 1) return Math.min(rightA, rightB);
+  return (Math.max(leftA, leftB) + Math.min(rightA, rightB)) / 2;
+};
+
 var findMedianSortedArrays2 = function(A, B) {
   const m = A.length;
   const n = B.length;

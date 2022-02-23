@@ -3,31 +3,45 @@
  * @param {string} s2
  * @return {boolean}
  */
- var isScramble = function(s1, s2) {
+// Using only Recursion.  195 / 288 test cases passed.
+var isScramble = function(s1, s2) {
   if (s1.length != s2.length) return false;
-    if (s1 === s2) return true
-    if (!isAnagram(s1, s2)) return false;
-  
-    return checkRec(s1, s2);
+  return canScramble(s1, s2);
+}  
+
+function canScramble(s1, s2) {
+  if (s1 == s2) return true;
+  const len = s1.length;
+  for (let i = 1; i < s1.length; i++) {
+      const first = canScramble(s1.substring(0,i), s2.substring(0, i)) &&
+            canScramble(s1.substring(i), s2.substring(i));
+      const second = canScramble(s1.substring(0,i), s2.substring(len - i)) &&
+            canScramble(s1.substring(i), s2.substring(0, len - i));
+      if (first || second) return true;
   }
-  
-  function checkRec(s1, s2) {
-    if (s1 === s2) return true;
+  return false;
+}
+
+// Using Dictionary for Dynamic Program.  276 / 288 test cases passed.
+var isScramble = function(s1, s2) {
     if (s1.length != s2.length) return false;
-    let scramble = false;
-    const len = s1.length;
-    for (let i = 1; i < len; i++) {
-      scramble = scramble || (checkRec(s1.substring(0,i), s2.substring(0,i)) && 
-                 checkRec(s1.substring(i,len), s2.substring(i, len))) || 
-                 (checkRec(s1.substring(0,i), s2.substr(len-i, len)) &&
-                 checkRec(s1.substring(i, len), s2.substring(0, len-i))) 
-      if (scramble) return true;
+    const dict = {};
+    
+    const canScramble = (s1, s2) => {
+        if (s1 == s2) return true;
+        const len = s1.length;
+        for (let i = 1; i < s1.length; i++) {
+            const key1 = s1.substring(0, i) + ':' + s2.substring(0, i);
+            const key2 = s1.substring(i) + ':' + s2.substring(i)
+            const key3 = s1.substring(0, i) + ':' + s2.substring(len - i);
+            const key4 = s1.substring(i) + ':' + s2.substring(0, len - i);
+            if (!dict.hasOwnProperty(key1)) dict[key1] = canScramble(s1.substring(0,i), s2.substring(0, i));
+            if (!dict.hasOwnProperty(key2)) dict[key2] = canScramble(s1.substring(i), s2.substring(i));
+            if (!dict.hasOwnProperty(key3)) dict[key3] = canScramble(s1.substring(0,i), s2.substring(len - i))
+            if (!dict.hasOwnProperty(key4)) dict[key4] = canScramble(s1.substring(i), s2.substring(0, len - i));
+            if ((dict[key1] && dict[key2]) || (dict[key3] && dict[key4])) return true;
+        }
+        return false;
     }
-    return scramble;
-  }
-  
-  function isAnagram(s1, s2) {
-    for (let i = 0; i <s1.length; i++) if (!s2.includes(s1[i])) return false;
-    return true;
-  }  
-  
+    return canScramble(s1, s2);
+}  

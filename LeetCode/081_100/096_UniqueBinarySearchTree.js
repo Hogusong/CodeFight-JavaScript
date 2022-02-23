@@ -2,7 +2,7 @@
  * @param {number} n
  * @return {number}
  */
- var numTrees = function(n) {
+var numTrees = function(n) {
   if (n <= 2) return n;
   return countTrees(1, n);
 }
@@ -53,4 +53,20 @@ var numTrees = function(n) {
   }
 
   return createTrees(n);
+}
+
+var numTrees = function(n) {
+  dict = {0: 1, 1: 1}
+  
+  const countTrees = (n) => {
+      if (dict[n]) return dict[n];
+      let count = 0;
+      for (let i = 1; i <= n; i++) {
+          count += countTrees(i-1) * countTrees(n-i);
+      }
+      dict[n] = count;
+      return count;
+  }
+
+  return countTrees(n);
 }

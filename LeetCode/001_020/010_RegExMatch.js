@@ -3,7 +3,8 @@
  * @param {string} p
  * @return {boolean}
  */
- var isMatch = function(s, p) {
+// Using 2D Array
+var isMatch = function(s, p) {
   const matrix = [];
   const helper = (i, j) => {
       if (j == p.length) return i == s.length;
@@ -17,16 +18,12 @@
       return result;
   }
   
-  for (let i = 0; i <= s.length; i++) {
-      const row = [];
-      for (let j = 0; j <= p.length; j++) row[j] = '';
-      matrix[i] = row;
-  }
+  for (let i = 0; i <= s.length; i++) matrix[i] = []
   
   return helper(0, 0);
 };
 
-// Solution using Recursion.
+// Using Dictionary.
 var isMatchRec = function(s, p) {
   dict = {};
   const helper = (i, j) => {
