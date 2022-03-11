@@ -13,3 +13,19 @@
   }
   return true;
 }
+
+var isPalindrome = function(s) {
+  let l = 0, r = s.length - 1;
+  s = s.toLowerCase();
+  while (l < r) {
+      while (l < r && !isAlphaNumeric(s[l])) l++;
+      while (l < r && !isAlphaNumeric(s[r])) r--;
+      if (s[l++] != s[r--]) return false;
+  }
+  return true;
+}
+
+function isAlphaNumeric(c) {
+  const n = c.charCodeAt();
+  return (n > 96 && n < 123) || (n > 47 && n < 58);
+}

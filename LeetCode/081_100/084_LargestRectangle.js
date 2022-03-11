@@ -48,3 +48,22 @@ var largestRectangleArea = function(heights) {
   }
   return Math.max(maxA, maxH);
 }
+
+var largestRectangleArea = function(heights) {
+  const len = heights.length;
+  if (len == 1) return heights[0];
+  let maxH = 0, max_area = 0;
+  for (let i = 0; i < len; i++) {
+      if (i > 0 && heights[i] === heights[i-1]) continue;
+      const h = heights[i];
+      if (h * len > max_area) {
+          if (h > maxH) maxH = h;
+          let l = i, r = i;
+          while (l >= 0 && h <= heights[l]) l--;
+          while (r < len && h <= heights[r]) r++;
+          max_area = Math.max(max_area, (r - l - 1) * h);
+      } 
+  }
+  
+  return Math.max(max_area, maxH);
+}

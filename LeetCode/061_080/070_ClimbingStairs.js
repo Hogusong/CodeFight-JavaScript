@@ -21,3 +21,14 @@ var climbStairs = function(n) {
   }
   return ans[n-1];
 }
+
+var climbStairs = function(n) {
+  if (n == 1) return 1;
+  let one = 1, two = 2;
+  for (let i = 3; i <= n; i++) {
+      const temp = one;
+      one = two;
+      two = temp + one;
+  }
+  return two;
+}

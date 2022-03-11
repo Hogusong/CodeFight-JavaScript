@@ -13,7 +13,7 @@
       }
       if (i >= candidates.length || candidates[i] > T) return;
       helper(i, T - candidates[i], [...ans, candidates[i]])
-      helper(i + 1, T, [...ans])
+      helper(i + 1, T, ans)
   }
   
   helper(0, target, []);

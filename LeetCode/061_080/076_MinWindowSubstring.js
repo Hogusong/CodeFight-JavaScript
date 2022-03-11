@@ -64,4 +64,34 @@ var minWindow2 = function(s, t) {
   return ans[0] < 0 ? '' : s.substring(ans[1], ans[2]+1);
 }
 
+var minWindow = function(s, t) {
+  if (s.length < t.length) return '';
+  if (s.includes(t)) return t;
+  const dict = {};
+  for (let c of t) {
+      if (!dict[c]) dict[c] = 1;
+      else dict[c]++;
+  }
+  
+  let start = -1, end = -1, low = 0, count = 0;
+  for (let i = 0; i < s.length; i++) {
+      if (!dict.hasOwnProperty(s[i])) continue;
+      if (dict[s[i]] > 0) count++;
+      dict[s[i]]--
+      if (count == t.length) {
+          while (low < i && (!dict.hasOwnProperty(s[low]) || dict[s[low]] < 0)) {
+              if (dict.hasOwnProperty(s[low])) dict[s[low]]++;
+              low++;
+          }
+          if (end < 0 || end - start > i - low) {
+              start = low;
+              end = i;
+          }
+          dict[s[low++]]++;
+          count--
+      }
+  }
+  return start < 0 ? '' : s.substring(start, end + 1);
+}
+
 console.log(minWindow("ADOBECODEBANC", "ABC"));
