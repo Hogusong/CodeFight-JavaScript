@@ -42,3 +42,18 @@ var kthSmallest = function(root, k) {
       curr = curr.right;
   }
 };
+
+var kthSmallest = function(root, k) {
+  const stack = [];
+  let curr = root;
+  while (k > 0) {
+      while (curr) {
+          stack.push(curr);
+          curr = curr.left;
+      }
+      curr = stack.pop();
+      k--;
+      if (k > 0) curr = curr.right;
+  }
+  return curr.val;
+};

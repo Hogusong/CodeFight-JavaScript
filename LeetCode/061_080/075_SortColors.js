@@ -26,6 +26,36 @@ var sortColors = function(nums) {
   return nums
 }
 
+var sortColors = function(nums) {
+    
+    const quickSort = (s, e) => {
+        if (s >= e) return;
+        let mid = Math.floor((s + e) / 2);
+        const n = nums[mid];
+        let left = s, right = e;
+        while (left < right) {
+            while (left < mid && nums[left] <= n) left++;
+            while (right > mid && nums[right] > n) right--;
+            if (left == right) break;
+            if (left == mid) {
+                nums[mid] = nums[right];
+                nums[right] = nums[mid + 1];
+                nums[mid + 1] = n;
+                mid++;
+            } else if (right == mid) {
+                nums[mid] = nums[left];
+                nums[left] = nums[mid - 1];
+                nums[mid - 1] = n;
+                mid--;                
+            } else [nums[left], nums[right]] = [nums[right], nums[left]]
+        }
+        quickSort(s, mid - 1);
+        quickSort(mid + 1, e);
+    }
+    
+    quickSort(0, nums.length - 1);
+}
+
 // Only possible when I know how many colors.
 var sortColors = function(nums) {
   let n = 0, index = 0;

@@ -35,3 +35,17 @@ var longestConsecutive = function(nums) {
   }
   return Math.max(maxL, count);
 };
+
+var longestConsecutive = function(nums) {
+    const set = new Set(nums);
+    
+    let maxS = 0;
+    for (let i = 0; i < nums.length; i++) {
+        if (!set.has(nums[i]-1)) {
+            let len = 1;
+            while (set.has(nums[i] + len)) len++;
+            maxS = Math.max(len, maxS);
+        }
+    }
+    return maxS
+};

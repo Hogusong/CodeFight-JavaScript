@@ -30,8 +30,32 @@
   return result;
 }
 
-function convert(arr) {
-  let num = 0;
-  for (let x of arr) num = num * 2 + +x;
-  return num;
+var grayCode = function(n) {
+  let res = ['0', '1'];
+
+  const generateGC = (i) => {
+      if (i == n) return;
+      const addZero = getGrayCode([...res], 0);
+      const addOne = getGrayCode([...res], 1);
+      res = [...addZero, ...addOne];
+      generateGC(i+1);
+  }
+  
+  generateGC(1);
+  for (let i = 0; i < res.length; i++) 
+      res[i] = convert(res[i]);
+  return res;
+}
+
+function getGrayCode(arr, prefix) {
+  const temp = []
+  if (prefix == 1) arr.reverse();
+  for (let str of arr) temp.push(prefix + str);
+  return temp;
+}
+
+function convert(str) {
+  let n = 0;
+  for (let c of str) n = n * 2 + parseInt(c);
+  return n;
 }

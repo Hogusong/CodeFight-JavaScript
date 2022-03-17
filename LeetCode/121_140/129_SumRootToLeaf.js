@@ -35,15 +35,15 @@ var sumNumbers = function(root) {
   let sum = 0;
   
   const travel = (node, ans) => {
-      ans += node.val;
+      ans = ans * 10 + node.val;
       if (!node.left && !node.right) {
-          sum += +ans;
+          sum += ans;
           return;
       }
       if (node.left) travel(node.left, ans);
       if (node.right) travel(node.right, ans);
   } 
   
-  travel(root, '');
+  travel(root, 0);
   return sum;
 }

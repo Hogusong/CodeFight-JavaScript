@@ -21,3 +21,12 @@ var majorityElement = function(nums) {
   nums = nums.sort((a, b) => a - b);
   return nums[Math.floor(n / 2)];
 };
+
+var majorityElement = function(nums) {
+  let majNum, count = 0;
+  for (let n of nums) {
+      if (count == 0) majNum = n;
+      count += majNum == n ? 1 : -1;
+  }
+  return majNum;
+};

@@ -10,7 +10,7 @@
  * @param {TreeNode} root
  * @return {number}
  */
- var countNodes = function(root) {
+var countNodes = function(root) {
   if (!root) return 0;
   
   const dfs = (node) => {
@@ -22,4 +22,16 @@
   }
   
   return 1 + dfs(root);
+};
+
+var countNodes = function(root) {
+  if (!root) return 0;
+  
+  const dfs = (node) => {
+      if (!node) return 0;
+      if (!node.left && !node.right) return 1;
+      return 1 + dfs(node.left) + dfs(node.right);
+  }
+  
+  return dfs(root);
 };

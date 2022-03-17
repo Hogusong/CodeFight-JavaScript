@@ -10,34 +10,35 @@
  * @param {TreeNode} root
  */
  var BSTIterator = function(root) {
-  this.root = root;
-  this.nodes = [];
-  const helper = (node) => {
-      if (!node) return;
-      helper(node.left);
-      this.nodes.push(node);
-      helper(node.right);
+  this.stack = [];
+  let curr = root;
+  while (curr) {
+      this.stack.push(curr);
+      curr = curr.left
   }
-  
-  helper(this.root);
-  this.nextNode = this.nodes[0];
 };
 
 /**
 * @return {number}
 */
 BSTIterator.prototype.next = function() {
-  const value = this.nextNode.val;
-  const index = this.nodes.findIndex(node => node === this.nextNode)
-  this.nextNode = this.nodes[index+1];
-  return value;
+  let curr = this.stack.pop()
+  const ans = curr.val;
+  if (curr.right) {
+      curr = curr.right;
+      while (curr) {
+          this.stack.push(curr);
+          curr = curr.left;
+      }
+  }
+  return ans;
 };
 
 /**
 * @return {boolean}
 */
 BSTIterator.prototype.hasNext = function() {
-  return this.nextNode !== undefined;
+  return this.stack.length > 0;
 };
 
 /** 

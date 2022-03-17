@@ -25,3 +25,21 @@
   }
   return nums;
 };
+
+// Handle with next index instead of using 2 arrays.
+var rightSideView = function(root) {
+    if (!root) return [];
+    const nums = [];
+    const queue = [root];
+    let nextIndex = 0;
+    while (queue.length > nextIndex) {
+        const qLen = queue.length;
+        nums.push(queue.at(-1).val);
+        for (let i = nextIndex; i < qLen; i++) {
+            rightNode = queue[nextIndex++];
+            if (rightNode.left) queue.push(rightNode.left);
+            if (rightNode.right) queue.push(rightNode.right);
+        }
+    }
+    return nums;
+};

@@ -59,3 +59,18 @@ var countPrimes = function(n) {
   for (let primes of primes) if (primes) count++;
   return count;
 }
+
+var countPrimes = function(n) {
+  if (n < 3) return 0;
+  const primes = new Array(n).fill(true);
+  let countNonPrime = 2;
+  for (let i = 2; i * i < n; i++) {
+    if (!primes[i]) continue;
+    for (let j = i * i; j < n; j += i) {
+      if (!primes[j]) continue;
+      primes[j] = false;
+      countNonPrime++;
+    }
+  }
+  return n - countNonPrime;
+}

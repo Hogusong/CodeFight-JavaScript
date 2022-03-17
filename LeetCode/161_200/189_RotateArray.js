@@ -36,27 +36,19 @@ var rotate = function(nums, k) {
 };
 
 var rotate = function(nums, k) {
-  const len = nums.length;
-  if (k == 0 || len == 1) return;
-  if (k > len) k = k % len;
-  let left = 0; right = len - 1;
-  while (left < right) {
-      [nums[left], nums[right]] = [nums[right], nums[left]];
-      left++;
-      right--;
-  }
-  left = 0;
-  right = k - 1
-  while (left < right) {
-      [nums[left], nums[right]] = [nums[right], nums[left]];
-      left++;
-      right--;
-  }
-  left = k;
-  right = len-1;
-  while (left < right) {
-      [nums[left], nums[right]] = [nums[right], nums[left]];
-      left++;
-      right--;
-  }
+    const len = nums.length;
+    if (k == 0 || len == 1) return;
+    if (k > len) k = k % len;
+    
+    const swap = (left, right) => {
+        while (left < right) {
+            [nums[left], nums[right]] = [nums[right], nums[left]];
+            left++;
+            right--;
+        }
+    }
+    
+    swap(0, len - 1);   // Reverse all elements
+    swap(0, k - 1);     // Reverse front k elements
+    swap(k, len - 1);   // Reverse the lest elements.
 };

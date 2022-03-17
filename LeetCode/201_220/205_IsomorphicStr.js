@@ -23,3 +23,27 @@ function hasSamePattern(s, t, i) {
   }
   return it < 0;
 }
+
+var isIsomorphic = function(s, t) {
+  const sDict = {}, tDict = {}, set = new Set();
+  for (let i = 0; i < s.length; i++) {
+      if (!sDict[s[i]]) sDict[s[i]] = [i];
+      else sDict[s[i]].push(i)
+
+      if (!tDict[t[i]]) tDict[t[i]] = [i];
+      else tDict[t[i]].push(i)
+  }
+  for (let i = 0; i < s.length; i++) {
+      if (set.has(s[i])) continue;
+      set.add(s[i]);
+      if (!isSamePattern(sDict[s[i]], tDict[t[i]])) return false
+  }
+  return true;
+};
+
+function isSamePattern(sArr, tArr) {
+  for (let i = 0; i < sArr.length; i++) {
+      if (sArr[i] != tArr[i]) return false;
+  }
+  return true;
+}

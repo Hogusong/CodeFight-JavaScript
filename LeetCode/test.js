@@ -1,121 +1,90 @@
-var isValidTree = (edges, k) => {
-  const dict = {};
-  for (let [x, y] of edges) {
-    if (!dict[x]) dict[x] = [y];
-    else dict[x].push(y);
-  }
-  console.log(dict);
+class MinHeap {
 
-  const visit = new Set();
+  constructor () {
+      /* Initialing the array heap and adding a dummy element at index 0 */
+      this.heap = [null]
+  }
+
+  getMin () {
+      /* Accessing the min element at index 1 in the heap array */
+      return this.heap[1]
+  }
   
-  const dfs = (n, prev) => {
-    if (visit.has(n)) return false;
-    visit.add(n);
-    if (!dict[n]) return true;
-    for (let x of dict[n]) {
-      if (x == prev) continue;
-      if (!dfs(x, n)) return false;
-    }
-    return true;
-  }
+  insert (node) {
 
-  if (!dfs(0,-1)) return false;
-  return visit.size == k;
-}
+      /* Inserting the new node at the end of the heap array */
+      this.heap.push(node)
 
-let edges = [[0,1], [1,2], [4,3], [5,4], [0,5], [1,5], [3, 0]]
-// console.log(isValidTree(edges, 5))
+      /* Finding the correct position for the new node */
 
-var numberOfConnected = (n, edges) => {
-  let output = [];
-  for (let edge of edges) output.push(new Set(edge));
-  // for (let [x, y] of edges) {
-  //   let set = output.find(s => s.has(x))
-  //   if (set) set.add(y)
-  //   else {
-  //     set = output.find(s => s.has(y))
-  //     if (set) set.add(x)
-  //     else {
-  //       const temp = new Set();
-  //       temp.add(x);
-  //       temp.add(y);
-  //       output.push(temp);
-  //     }
-  //   }
-  // }
+      if (this.heap.length > 1) {
+          let current = this.heap.length - 1
 
-  const mergeSets = (set1, set2) => {
-    for (let x of set2) {
-      if (set1.has(x)) {
-        for (let x of set2) set1.add(x);
-        return true;
+          /* Traversing up the parent node until the current node (current) is greater than the parent (current/2)*/
+          while (current > 1 && this.heap[Math.floor(current/2)] > this.heap[current]) {
+
+              /* Swapping the two nodes by using the ES6 destructuring syntax*/
+              [this.heap[Math.floor(current/2)], this.heap[current]] = [this.heap[current], this.heap[Math.floor(current/2)]]
+              current = Math.floor(current/2)
+          }
       }
-    }
-    return false;
+      console.log(this.heap)
   }
+  
+  remove() {
+      /* Smallest element is at the index 1 in the heap array */
+      let smallest = this.heap[1]
 
-  console.log(output)
-  let merged = true;
-  while (merged && output.length > 1) {
-    merged = false;
-    const temp = output;
-    output = [];
-    const set = temp[0];
-    while (temp.length > 1) {
-      const tSet = temp.pop();
-      const res = mergeSets(set, tSet)
-      if (!res) output.push(tSet)
-      else merged = res;
-    }
-    output.push(set);
-  }
+      /* When there are more than two elements in the array, we put the right most element at the first position
+          and start comparing nodes with the child nodes
+      */
+      if (this.heap.length > 2) {
+          this.heap[1] = this.heap[this.heap.length-1]
+          this.heap.splice(this.heap.length - 1)
 
-  for (let i = 1; i < n; i++) {
-    let set = output.find(s => s.has(i))
-    if (!set) output.push(new Set([i]));
+          if (this.heap.length === 3) {
+              if (this.heap[1] > this.heap[2]) {
+                  [this.heap[1], this.heap[2]] = [this.heap[2], this.heap[1]]
+              }
+              return smallest
+          }
+
+          let current = 1
+          let leftChildIndex = current * 2
+          let rightChildIndex = current * 2 + 1
+
+          while (this.heap[leftChildIndex] &&
+                  this.heap[rightChildIndex] &&
+                  (this.heap[current] > this.heap[leftChildIndex] ||
+                      this.heap[current] > this.heap[rightChildIndex])) {
+              if (this.heap[leftChildIndex] < this.heap[rightChildIndex]) {
+                  [this.heap[current], this.heap[leftChildIndex]] = [this.heap[leftChildIndex], this.heap[current]]
+                  current = leftChildIndex
+              } else {
+                  [this.heap[current], this.heap[rightChildIndex]] = [this.heap[rightChildIndex], this.heap[current]]
+                  current = rightChildIndex
+              }
+
+              leftChildIndex = current * 2
+              rightChildIndex = current * 2 + 1
+          }
+      }
+
+      /* If there are only two elements in the array, we directly splice out the first element */
+
+      else if (this.heap.length === 2) {
+          this.heap.splice(1, 1)
+      } else {
+          return null
+      }
+
+      return smallest
   }
-  console.log(output)
-  return output.length;
 }
 
-console.log(numberOfConnected(6, edges))
-
-function numberOfConnected1(n, edges) {
-  const par = [], rank = new Array(n).fill(1);
-  for (let i = 0; i < n; i++) par.push(i)
-
-  const find = (x) => {
-    while (x != par[x]) {
-      par[x] = par[par[x]];
-      x = par[x]
-    }
-    return x
-  }
-
-  const union = (n1, n2) => {
-    const p1 = find(n1), p2 = find(n2);
-    if (p1 == p2) return 0;
-    if (rank[p2] > rank[p1]) {
-      par[p1] = p2;
-      rank[p2] += rank[p1];
-    } else {
-      par[p2] = p1;
-      rank[p1] += rank[p2]
-    }
-    return 1;
-  }
-
-  let res = n;
-  for (let [n1, n2] of edges) {
-    res -= union(n1, n2);
-  }
-
-  return res;
-}
-
-console.log('a'.charCodeAt())
-console.log('z'.charCodeAt())
-console.log('0'.charCodeAt())
-console.log('9'.charCodeAt())
-console.log('A'.charCodeAt())
-console.log('Z'.charCodeAt())
+const minHeap = new MinHeap();
+const nums = [5,7,3,6,9,1,2,4];
+for (let n of nums) minHeap.insert(n);
+console.log(minHeap.getMin());
+console.log(minHeap.remove());
+console.log(minHeap.getMin());
